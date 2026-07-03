@@ -1,0 +1,876 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ========================= */
+/* BODY */
+/* ========================= */
+
+body{
+    min-height: 100vh;
+
+    font-family: 'Orbitron', sans-serif;
+
+    background:
+    linear-gradient(
+        rgba(5,5,20,0.85),
+        rgba(5,5,20,0.85)
+    ),
+    url("fondo-galaxia-realista_23-2148991322.avif");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    color: white;
+
+    transition: 0.4s;
+}
+
+/* ========================= */
+/* TEMA CLARO */
+/* ========================= */
+
+#tema{
+    display: none;
+}
+
+body:has(#tema:checked){
+    background:
+    linear-gradient(
+        rgba(230,230,255,0.9),
+        rgba(210,220,255,0.9)
+    ),
+    url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    color: #111;
+}
+
+/* ========================= */
+/* HEADER */
+/* ========================= */
+
+header{
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 20px 40px;
+
+    background:
+    linear-gradient(
+        rgba(10,10,30,0.9),
+        rgba(5,5,20,0.95)
+    );
+
+    border-bottom: 2px solid rgb(88,5,182);
+
+    box-shadow:
+    0 0 25px rgba(88,5,182,0.4);
+
+    backdrop-filter: blur(10px);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+}
+
+body:has(#tema:checked) header{
+    background:
+    linear-gradient(
+        rgba(255,255,255,0.9),
+        rgba(230,230,255,0.95)
+    );
+}
+
+/* ========================= */
+/* TITULOS */
+/* ========================= */
+
+h1{
+    font-size: 2rem;
+
+    color: rgb(88,5,182);
+
+    white-space: nowrap;
+
+    animation: neon 2s infinite alternate;
+}
+
+.hero h2{
+    font-size: 3rem;
+
+    animation: neon 2s infinite alternate;
+}
+
+@keyframes neon{
+
+    from{
+        text-shadow:
+        0 0 10px rgb(88,5,182),
+        0 0 20px rgb(88,5,182);
+    }
+
+    to{
+        text-shadow:
+        0 0 20px white,
+        0 0 40px rgb(140,50,255);
+    }
+
+}
+
+/* ========================= */
+/* BUSQUEDA */
+/* ========================= */
+
+.busqueda{
+    display: flex;
+
+    flex: 3;
+
+    width: 100%;
+
+    max-width: 1200px;
+}
+
+.busqueda input{
+    width: 100%;
+
+    padding: 17px;
+
+    border: 2px solid rgb(88,5,182);
+
+    background: #111;
+
+    color: white;
+
+    outline: none;
+
+    border-radius: 10px 0 0 10px;
+}
+
+.busqueda button{
+    padding: 17px 20px;
+
+    border: none;
+
+    background: rgb(88,5,182);
+
+    color: white;
+
+    cursor: pointer;
+
+    border-radius: 0 10px 10px 0;
+}
+
+body:has(#tema:checked) .busqueda input{
+    background: white;
+
+    color: black;
+}
+
+/* ========================= */
+/* BOTONES */
+/* ========================= */
+
+.menu-top{
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.btn-catalogo,
+.btn-usuario,
+.btn-config{
+    background: transparent;
+
+    color: white;
+
+    border: 2px solid rgb(88,5,182);
+
+    padding: 8px 12px;
+
+    font-size: 0.8rem;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    white-space: nowrap;
+}
+
+.btn-catalogo:hover,
+.btn-usuario:hover,
+.btn-config:hover{
+    background: rgb(88,5,182);
+}
+
+body:has(#tema:checked) .btn-catalogo,
+body:has(#tema:checked) .btn-usuario,
+body:has(#tema:checked) .btn-config{
+    color: black;
+}
+
+/* ========================= */
+/* MENUS */
+/* ========================= */
+
+.usuario,
+.catalogo,
+.configuracion{
+    position: relative;
+}
+
+#menu-toggle,
+#catalogo-toggle,
+#config-toggle{
+    display: none;
+}
+
+.menu-usuario,
+.menu-catalogo,
+.menu-config{
+    position: absolute;
+
+    top: 55px;
+
+    right: 0;
+
+    background: #111;
+
+    border: 2px solid rgb(88,5,182);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(10px);
+
+    transition: 0.3s;
+
+    z-index: 1000;
+}
+
+.menu-usuario{
+    width: 220px;
+}
+
+.menu-catalogo{
+    width: 260px;
+
+    max-height: 400px;
+
+    overflow-y: auto;
+    
+}
+
+.menu-config{
+    width: 220px;
+}
+
+.menu-usuario a,
+.menu-catalogo a{
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px;
+
+    text-decoration: none;
+
+    color: white;
+}
+
+.menu-usuario a:hover,
+.menu-catalogo a:hover{
+    background: rgb(88,5,182);
+}
+
+.menu-catalogo img{
+    width: 28px;
+    height: 28px;
+}
+
+#menu-toggle:checked ~ .menu-usuario,
+#catalogo-toggle:checked ~ .menu-catalogo,
+#config-toggle:checked ~ .menu-config{
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+}
+
+/* ========================= */
+/* BOTON TEMA */
+/* ========================= */
+
+.tema-btn{
+    display: block;
+
+    padding: 15px;
+
+    cursor: pointer;
+
+    color: white;
+}
+
+.tema-btn:hover{
+    background: rgb(88,5,182);
+}
+
+/* ========================= */
+/* HERO */
+/* ========================= */
+
+.hero{
+    text-align: center;
+
+    margin-top: 100px;
+
+    padding: 30px;
+}
+
+.hero p{
+    margin-top: 20px;
+
+    font-size: 1.2rem;
+}
+
+/* ========================= */
+/* CONTENEDOR SECCIONES */
+/* ========================= */
+
+.contenedor-secciones{
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    gap: 40px;
+
+    padding: 20px 40px;
+
+    flex-wrap: wrap;
+}
+
+/* ========================= */
+/* SECCIONES JUEGOS */
+/* ========================= */
+
+.seccion-juegos{
+    flex: 1;
+
+    min-width: 320px;
+
+    padding: 25px;
+
+    border: 3px solid rgb(88,5,182);
+
+    border-radius: 20px;
+
+    background: rgba(10,10,25,0.55);
+
+    backdrop-filter: blur(10px);
+
+    box-shadow:
+    0 0 20px rgba(88,5,182,0.5),
+    inset 0 0 15px rgba(88,5,182,0.2);
+}
+
+body:has(#tema:checked) .seccion-juegos{
+    background: rgba(255,255,255,0.65);
+
+    border: 3px solid rgb(120,70,255);
+
+    box-shadow:
+    0 0 15px rgba(120,70,255,0.3);
+}
+
+.titulo-seccion{
+    font-size: 2rem;
+
+    margin-bottom: 30px;
+
+    color: rgb(170,100,255);
+
+    text-shadow:
+    0 0 10px rgb(88,5,182);
+}
+
+/* ========================= */
+/* GRID JUEGOS */
+/* ========================= */
+
+.juegos{
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 25px;
+}
+
+/* ========================= */
+/* CARDS */
+/* ========================= */
+
+.card{
+    background: rgba(15,15,25,0.95);
+
+    border: 2px solid rgba(140,50,255,0.4);
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    transition: 0.3s;
+}
+
+.card:hover{
+    transform: translateY(-10px);
+
+    box-shadow:
+    0 0 20px rgb(88,5,182);
+}
+
+.card img{
+    width: 100%;
+
+    height: 160px;
+
+    object-fit: cover;
+}
+
+.card h3{
+    padding: 15px 15px 5px;
+
+    color: rgb(170,100,255);
+}
+
+.card p{
+    padding: 0 15px 15px;
+
+    color: #ccc;
+}
+
+.card button{
+    width: 90%;
+
+    margin: 15px;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: rgb(88,5,182);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-family: 'Orbitron', sans-serif;
+}
+
+body:has(#tema:checked) .card{
+    background: rgba(255,255,255,0.9);
+
+    color: black;
+}
+
+/* ========================= */
+/* CATEGORIAS */
+/* ========================= */
+
+.categorias-visuales{
+    padding: 40px;
+}
+
+.categorias-visuales h2{
+    text-align: center;
+
+    margin-bottom: 30px;
+
+    font-size: 2rem;
+
+    color: rgb(170,100,255);
+}
+
+.contenedor-slider{
+    width: 100%;
+
+    overflow-x: auto;
+
+    padding-bottom: 10px;
+}
+
+.contenedor-categorias{
+    display: flex;
+
+    gap: 20px;
+
+    width: max-content;
+}
+
+.categoria{
+    width: 300px;
+
+    height: 180px;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    transition: 0.3s;
+
+    border: 2px solid rgba(140,50,255,0.5);
+}
+
+.categoria:hover{
+    transform: scale(1.05);
+}
+
+.categoria::before{
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.35);
+}
+
+.categoria button{
+    position: relative;
+
+    z-index: 2;
+
+    background: white;
+
+    color: black;
+
+    border: none;
+
+    padding: 15px 25px;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+/* ========================= */
+/* CARRITO */
+/* ========================= */
+
+.comprar{
+    position: fixed;
+
+    bottom: 25px;
+    right: 25px;
+
+    width: 75px;
+    height: 75px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 32px;
+
+    text-decoration: none;
+
+    color: white;
+
+    background: rgb(88,5,182);
+
+    box-shadow:
+    0 0 15px rgb(88,5,182),
+    0 0 30px rgb(88,5,182);
+
+    transition: 0.3s;
+}
+
+.comprar:hover{
+    transform: scale(1.1);
+}
+
+/* ========================= */
+/* RESPONSIVE OPTIMIZADO */
+/* ========================= */
+
+@media(max-width: 950px){
+
+    header{
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .busqueda{
+        max-width: 100%;
+    }
+
+    .menu-top{
+        width: 100%;
+        justify-content: center;
+    }
+
+    .juegos{
+        grid-template-columns: 1fr;
+    }
+
+    .categoria{
+        width: 240px;
+    }
+
+}
+
+@media(max-width: 700px){}
+
+    header{
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 15px 10px;
+    }
+
+    h1{
+        font-size: 1.5rem;
+        text-align: center;
+        white-space: normal;+
+
+    .busqueda{
+        width: 100%;
+    }
+
+    .busqueda input{
+        padding: 13px;
+        font-size: 0.9rem;
+    }
+
+    .busqueda button{
+        padding: 13px 16px;
+    }
+
+    .menu-top{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .btn-catalogo,
+    .btn-usuario,
+    .btn-config{
+        font-size: 0.75rem;
+        padding: 7px 12px;
+        white-space: nowrap;
+    }
+
+    .menu-usuario,
+    .menu-catalogo,
+    .menu-config{
+        right: 50%;
+        left: 50%;
+        transform: translate(-50%, 10px);
+        width: 280px;
+        max-width: 90vw;
+    }
+
+    #menu-toggle:checked ~ .menu-usuario,
+    #catalogo-toggle:checked ~ .menu-catalogo,
+    #config-toggle:checked ~ .menu-config{
+        transform: translate(-50%, 0);
+    }
+
+    .hero{
+        margin-top: 40px;
+        padding: 20px 10px;
+    }
+
+    .hero h2{
+        font-size: 1.8rem;
+    }
+
+    .hero p{
+        font-size: 1rem;
+    }
+
+    .contenedor-secciones{
+        padding: 15px 10px;
+        gap: 20px;
+    }
+
+    .seccion-juegos{
+        padding: 15px;
+        min-width: 100%; 
+    }
+
+    .titulo-seccion{
+        font-size: 1.4rem;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .juegos{
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .card{
+        width: 100%;
+    }
+
+    .card img{
+        height: 150px; 
+    }
+
+    .categoria{
+        width: 210px;
+        height: 130px;
+    }
+
+    .comprar{
+        width: 58px;
+        height: 58px;
+        font-size: 24px;
+        bottom: 15px;
+        right: 15px;
+    }
+
+}
+
+@media(max-width: 360px) {
+    .menu-top {
+        flex-direction: column;
+        width: 100%;
+    }
+    .btn-catalogo,
+    .btn-usuario,
+    .btn-config {
+        width: 100%;
+        text-align: center;
+    }
+    .menu-usuario,
+    .menu-catalogo,
+    .menu-config {
+        width: 90vw;
+    }
+}
+/* ========================= */
+/* IMÁGENES CATEGORÍAS */
+/* ========================= */
+
+.categoria{
+    background-size: cover;
+    background-position: center;
+}
+
+/* AVENTURA */
+.categoria.aventura{
+    background-image: url("Top-10-de-los-mejores-juegos-de-aventura.jpg");
+}
+
+/* SUPERVIVENCIA */
+.categoria.supervivencia{
+    background-image: url("202112117592770_1.jpg");
+}
+
+/* LUCHA */
+.categoria.lucha{
+    background-image: url("images.\(2\).jpg");
+}
+
+/* ACCIÓN */
+.categoria.accion{
+    background-image: url("wallpapersden_rasy.1280.webp");
+}
+
+/* TERROR */
+.categoria.terror{
+    background-image: url("images\ \(2\).jpg");
+}
+
+/* FPS */
+.categoria.fps{
+    background-image: url("1366_2000.jpeg");
+}
+
+/* ROYALE */
+.categoria.royale{
+    background-image: url("royale.jpg");
+}
+
+/* RPG */
+.categoria.rpg{
+    background-image: url("images\ \(3\).jpg");
+}
+
+/* DEPORTES */
+.categoria.deportes{
+    background-image: url("images\ \(4\).jpg");
+}
+
+/* SIMULACIÓN */
+.categoria.simulacion{
+    background-image: url("images\ \(5\).jpg");
+}
+
+/* CARRERAS */
+.categoria.carreras{
+    background-image: url("20223916582699_1.jpg");
+}
+
+/* ESTRATEGIA */
+.categoria.estrategia{
+    background-image: url("1366_2000\ \(1\).jpeg");
+}
+
+/* SANDBOX */
+.categoria.sandbox{
+    background-image: url("sandbox.jpg");
+}
+
+/* INDIE */
+.categoria.indie{
+    background-image: url("images\ \(6\).jpg");
+}
